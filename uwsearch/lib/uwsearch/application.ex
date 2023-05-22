@@ -19,7 +19,7 @@ defmodule Uwsearch.Application do
       # Start the Endpoint (http/https)
       UwsearchWeb.Endpoint
       # Start a worker by calling: Uwsearch.Worker.start_link(arg)
-      # {Uwsearch.Worker, arg}
+      {Elasticlunr.IndexManager, name:Uwsearch.IndexManager}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
