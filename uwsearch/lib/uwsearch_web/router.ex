@@ -19,7 +19,11 @@ defmodule UwsearchWeb.Router do
 
     get "/", PageController, :home
 
+    get "/loadindex", PageController, :loadindex
+    get "/search/:query", PageController, :search
+    get "/courseid/:query", PageController, :getbyid
     get "/courses", PageController, :getcourses
+    get "/indices", PageController, :getindices
   end
 
   # Other scopes may use custom stacks.

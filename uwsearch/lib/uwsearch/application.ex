@@ -4,6 +4,8 @@ defmodule Uwsearch.Application do
   @moduledoc false
 
   use Application
+  alias Elasticlunr.{Index, Pipeline}
+
 
   @impl true
   def start(_type, _args) do
@@ -14,12 +16,15 @@ defmodule Uwsearch.Application do
       Uwsearch.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: Uwsearch.PubSub},
+      {Uwsearch.JsonTable, []},
       # Start Finch
       {Finch, name: Uwsearch.Finch},
+
+      Elasticlunr.IndexManager.child_spec(Index.new(name: "test_index")),
       # Start the Endpoint (http/https)
-      UwsearchWeb.Endpoint
+      UwsearchWeb.Endpoint,
       # Start a worker by calling: Uwsearch.Worker.start_link(arg)
-      {Elasticlunr.IndexManager, name:Uwsearch.IndexManager}
+
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
